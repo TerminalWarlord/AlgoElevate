@@ -1,16 +1,38 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import NavBar from "@/components/layout/NavBar/NavBar";
+import { Bebas_Neue, Poppins, Roboto, Odibee_Sans, Baumans } from 'next/font/google';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Configure each font
+const odibeeSans = Odibee_Sans({
+  variable: "--font-odibee-sans",
+  subsets: ['latin'],
+  weight: ['400']
+});
+const baumans = Baumans({
+  variable: "--font-baumans",
+  subsets: ['latin'],
+  weight: ['400']
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas-neue",
+  subsets: ['latin'],
+  weight: ['400']
 });
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ['latin'],
+  weight: ['100', '400', '700']
+});
+const roboto = Roboto({
+  variable: "--font-roboto",
+  subsets: ['latin'],
+  weight: ['100', '400', '700']
+});
+
+
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,9 +46,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${odibeeSans.variable} ${bebasNeue.variable} ${roboto.variable} ${poppins.variable} ${baumans.variable} antialiased`}
       >
+        <NavBar />
         {children}
       </body>
     </html>
