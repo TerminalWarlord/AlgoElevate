@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/layout/NavBar/NavBar";
-import { Bebas_Neue, Poppins, Roboto, Odibee_Sans, Baumans } from 'next/font/google';
+import { Bebas_Neue, Poppins, Roboto, Odibee_Sans, Baumans, Public_Sans } from 'next/font/google';
 
 // Configure each font
 const odibeeSans = Odibee_Sans({
@@ -9,6 +9,13 @@ const odibeeSans = Odibee_Sans({
   subsets: ['latin'],
   weight: ['400']
 });
+
+const publicSans = Public_Sans({
+  variable: "--font-public-sans",
+  subsets: ['latin'],
+  weight: ['400']
+});
+
 const baumans = Baumans({
   variable: "--font-baumans",
   subsets: ['latin'],
@@ -48,7 +55,7 @@ export default function RootLayout({
     <html lang="en">
 
       <body
-        className={`${odibeeSans.variable} ${bebasNeue.variable} ${roboto.variable} ${poppins.variable} ${baumans.variable} antialiased`}
+        className={`${odibeeSans.variable} ${bebasNeue.variable} ${roboto.variable} ${poppins.variable} ${baumans.variable} ${publicSans.variable} antialiased`}
       >
         <NavBar />
         {children}

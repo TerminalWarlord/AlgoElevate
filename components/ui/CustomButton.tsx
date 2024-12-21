@@ -5,13 +5,14 @@ interface CustomButtonProps {
     text: string,
     icon?: string,
     style?: string,
+    onClick?: () => void
 }
 
 
-const CustomButton: React.FC<CustomButtonProps> = ({ text, icon, style }) => {
+const CustomButton: React.FC<CustomButtonProps> = ({ text, icon, style, onClick }) => {
     const image = icon ? <Image src={icon} alt="Run icon" width={14} height={14} /> : <></>
     return (
-        <Button className={style} variant="outline">{text}{image}</Button>
+        <Button onClick={onClick} className={style} variant="outline">{text}{image}</Button>
 
     )
 }
