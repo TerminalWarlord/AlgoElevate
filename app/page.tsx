@@ -1,9 +1,26 @@
-import Home from "@/components/landing/Home";
+import Sidebar from "@/components/layout/Sidebar"
 
-export default function Page() {
-  return (
-    <div className="bg-[#F2F2F2] w-full h-fit min-h-lvh">
-      <Home />
-    </div>
-  );
+const Page = () => {
+    return (
+        <div className="mx-[150px] flex">
+            <Sidebar />
+            <div className="text-white border-r-[0.2px] border-gray-700 w-full">
+                <h1>Hellllo</h1>
+                <h1>Hellllo</h1>
+                <h1>Hellllo</h1>
+                <h1>Hellllo</h1>
+                <h1>Hellllo</h1>
+                <h1>Hellllo</h1>
+                <h1>Hellllo</h1>
+                <h1>Hellllo</h1>
+                <h1>Hellllo</h1>
+                <h1>Hellllo</h1>
+                <h1>Hellllo</h1>
+                <h1>Hellllo</h1>
+                <h1>Hellllo</h1>
+            </div>
+        </div>
+    )
 }
+
+export default Page

@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import NavBar from "@/components/layout/NavBar/NavBar";
-import { Bebas_Neue, Poppins, Roboto, Odibee_Sans, Baumans, Public_Sans } from 'next/font/google';
+import { Bebas_Neue, Poppins, Roboto, Odibee_Sans, Baumans, Public_Sans, Manrope } from 'next/font/google';
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 // Configure each font
 const odibeeSans = Odibee_Sans({
   variable: "--font-odibee-sans",
+  subsets: ['latin'],
+  weight: ['400']
+});
+
+
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ['latin'],
   weight: ['400']
 });
@@ -55,10 +63,13 @@ export default function RootLayout({
     <html lang="en">
 
       <body
-        className={`${odibeeSans.variable} ${bebasNeue.variable} ${roboto.variable} ${poppins.variable} ${baumans.variable} ${publicSans.variable} antialiased`}
+        className={`${odibeeSans.variable} ${bebasNeue.variable} ${roboto.variable} ${poppins.variable} ${baumans.variable} ${publicSans.variable} ${manrope.variable} antialiased bg-black`}
       >
-        <NavBar />
+        <div className="sticky top-0 bg-black z-50">
+          <Navbar />
+        </div>
         {children}
+        <Footer />
       </body>
     </html>
   );
