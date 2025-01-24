@@ -3,6 +3,7 @@ import "./globals.css";
 import { Bebas_Neue, Poppins, Roboto, Odibee_Sans, Baumans, Public_Sans, Manrope } from 'next/font/google';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // Configure each font
 const odibeeSans = Odibee_Sans({
@@ -63,13 +64,20 @@ export default function RootLayout({
     <html lang="en">
 
       <body
-        className={`${odibeeSans.variable} ${bebasNeue.variable} ${roboto.variable} ${poppins.variable} ${baumans.variable} ${publicSans.variable} ${manrope.variable} antialiased bg-black`}
+        className={`${odibeeSans.variable} ${bebasNeue.variable} ${roboto.variable} ${poppins.variable} ${baumans.variable} ${publicSans.variable} ${manrope.variable} antialiased`}
       >
-        <div className="sticky top-0 z-50">
-          <Navbar />
-        </div>
-        {children}
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="sticky top-0 z-50">
+            <Navbar />
+          </div>
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

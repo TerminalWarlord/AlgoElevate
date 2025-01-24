@@ -20,7 +20,7 @@ export default {
     			dark_orange: '#F26646',
     			yellow: '#FFF4D0',
     			dark_yellow: '#E9A012',
-    			light_east: '#D2F1F1',
+    			light_easy: '#D2F1F1',
     			easy: '#24BDBD',
     			medium: '#FFB701',
     			light_medium: '#FFF1CD',
