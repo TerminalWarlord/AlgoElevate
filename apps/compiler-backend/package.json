@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc -b",
     "start": "npm run build && node ./dist/index.js",
-    "dev": "npm start"
+    "dev": "npm run build && nodemon ./dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -14,9 +14,17 @@
   "description": "",
   "dependencies": {
     "@repo/db": "workspace:*",
+    "cors": "^2.8.5",
+    "dockerode": "^4.0.4",
+    "express": "^4.21.2",
+    "tmp-promise": "^3.0.3"
+  },
+  "devDependencies": {
     "@repo/typescript-config": "workspace:*",
+    "@types/cors": "^2.8.17",
+    "@types/dockerode": "^3.3.34",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.10",
-    "express": "^4.21.2"
+    "nodemon": "^3.1.9"
   }
 }

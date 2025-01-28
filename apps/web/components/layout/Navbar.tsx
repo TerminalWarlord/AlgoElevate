@@ -6,7 +6,7 @@ import { ModeToggle } from "../ui/theme-toggle";
 const Navbar = () => {
     return (
         <div
-            className="w-full dark:bg-black h-12 px-[150px] flex justify-between items-center text-gray-200 border-b-[0.2px] border-gray-900 border-opacity-10 dark:border-opacity-100 bg-opacity-10 backdrop-blur-sm sticky top-0"
+            className="w-full h-12 px-[150px] flex justify-between items-center text-gray-200 border-b-[0.2px] border-gray-900 border-opacity-10  bg-opacity-10 backdrop-blur-sm sticky top-0"
             style={{ fontFamily: "var(--font-manrope)" }}
         >
             <div className="flex space-x-6">

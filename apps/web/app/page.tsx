@@ -7,6 +7,9 @@ const Page = () => {
             <Sidebar />
             <div className="text-white border-r-[0.2px] border-gray-700 w-full">
                 <ProblemCard/>
+                <ProblemCard/>
+                <ProblemCard/>
+                <ProblemCard/>
             </div>
         </div>
     )

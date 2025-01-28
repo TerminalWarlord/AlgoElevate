@@ -1,0 +1,20 @@
+services:
+  cpp:
+    build: .
+    container_name: cpp_compiler
+    working_dir: /usr/src/app/codes
+    entrypoint: ["sh", "-c", "g++ -o program ./code.cpp && ./program"]
+    volumes:
+      - code:/usr/src/app/codes  # Mount local codes directory
+
+  python:
+    build: .
+    container_name: py_compiler
+    working_dir: /usr/src/app/codes
+    entrypoint: ["python3"]  # Simply use python3 as entrypoint
+    volumes:
+      - code:/usr/src/app/codes  # Mount local codes directory
+
+volumes:
+  code:
+    driver: local

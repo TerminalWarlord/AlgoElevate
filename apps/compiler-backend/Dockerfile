@@ -1,7 +1,8 @@
-FROM gcc:latest
+FROM gcc:latest AS cpp
+WORKDIR /app
+COPY ./codes /app/codes
 
-WORKDIR /usr/src/app
 
-COPY main.cpp .
-
-ENTRYPOINT ["sh", "-c", "gcc -o"]
+FROM python:latest AS python
+WORKDIR /app
+COPY --from=cpp /app/codes /app/codes

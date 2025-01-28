@@ -11,7 +11,7 @@ interface STDioType {
 
 const STDio: React.FC<STDioType> = ({ stdin, stdout, onStdinChange, onStdoutChange }) => {
 
-
+    console.log(stdout);
     return (
         <div className="flex flex-col gap-y-5 h-full">
             <div className="flex flex-col h-2/3  rounded-xl" style={shadow}>

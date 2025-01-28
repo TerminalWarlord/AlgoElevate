@@ -20,7 +20,7 @@ const IdePage = () => {
         code: "",
         stdin: "",
         stdout: "",
-        language: "c++",
+        language: "python",
         userId: 2
 
     });
@@ -53,9 +53,7 @@ const IdePage = () => {
             }
         });
     }
-    function handleRun() {
-
-    }
+    
 
     async function submitData() {
         console.log(codeData)
@@ -83,6 +81,44 @@ const IdePage = () => {
         }
     }
 
+    async function executeCode(){
+        try {
+            const res = await fetch(`http://localhost:3002/execute/${codeData.language}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(codeData),
+            });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                console.error("Error:", res.status, errorData);
+                return;
+            }
+
+            const responseData = await res.json();
+            setCodeData(prevCodeData => {
+                return {
+                    ...prevCodeData,
+                    stdout: responseData.output
+                }
+            })
+            console.log("Data submitted successfully:", responseData);
+        } catch (error) {
+            console.error("Unexpected error:", error);
+        }
+    }
+
+    function onLanguageSelection(lang:string){
+        setCodeData(prevCodeData=>{
+            return {
+                ...prevCodeData,
+                language: lang
+            }
+        })
+    }
+
 
     function handleSave() {
         submitData();
@@ -92,7 +128,7 @@ const IdePage = () => {
     return (
         <div className="px-[100px] flex gap-x-5 mt-8">
             <div className="rounded-xl min-h-[400px] w-3/4 flex flex-col gap-y-4">
-                <ActionButtons onRun={handleRun} onSave={handleSave} />
+                <ActionButtons onRun={executeCode} onSave={handleSave} onLanguageSelection={onLanguageSelection} />
                 <CodeEditor onChange={handleCode} />
             </div>
             <div className="flex-1 rounded-xl">
