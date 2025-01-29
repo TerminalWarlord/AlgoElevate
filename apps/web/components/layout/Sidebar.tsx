@@ -16,7 +16,7 @@ const Sidebar = () => {
         </>
     ))}</>
     return (
-        <ScrollArea className="h-screen w-64  text-white border-gray-700 border-x-[0.2px]">
+        <ScrollArea className="hidden sm:block h-screen w-64 text-white border-gray-700 border-x-[0.3px] border-opacity-15 dark:border-opacity-90">
             <div className="py-4 mx-4" style={{ fontFamily: 'var(--font-manrope)' }}>
                 <h4 className="mb-4 font-medium leading-none uppercase text-gray-300">Problems</h4>
                 {items}

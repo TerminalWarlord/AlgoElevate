@@ -1,8 +1,8 @@
 "use client";
 
-import ActionButtons from "@/components/ide/ActionButtons"
-import CodeEditor from "@/components/ide/CodeEditor"
-import STDio from "@/components/ide/STDio"
+import ActionButtons from "@/components/ide/action-buttons"
+import CodeEditor from "@/components/ide/code-editor"
+import STDio from "@/components/ide/stdio"
 import { useRouter } from "next/navigation";
 import { useState } from "react"
 
@@ -126,10 +126,10 @@ const IdePage = () => {
     }
 
     return (
-        <div className="px-[100px] flex gap-x-5 mt-8">
-            <div className="rounded-xl min-h-[400px] w-3/4 flex flex-col gap-y-4">
+        <div className="px-4 md:px-12 lg:px-24 xl:px-[150px] flex gap-x-5 mt-8 flex-col md:flex-row">
+            <div className="rounded-xl min-h-[400px] w-full md:w-3/4 flex flex-col gap-y-4">
                 <ActionButtons onRun={executeCode} onSave={handleSave} onLanguageSelection={onLanguageSelection} />
-                <CodeEditor onChange={handleCode} />
+                <CodeEditor onChange={handleCode} language={codeData.language}/>
             </div>
             <div className="flex-1 rounded-xl">
                 <STDio onStdinChange={handleStdin} onStdoutChange={handleStdout} {...codeData} />

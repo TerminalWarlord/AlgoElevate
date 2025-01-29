@@ -6,10 +6,10 @@ import Link from "next/link";
 const Footer = () => {
     return (
         <div
-            className="w-full dark:bg-black h-12 px-[150px] flex justify-between items-center text-gray-200 border-t-[0.2px] border-opacity-10 dark:border-opacity-100 border-gray-900"
+            className="px-4 md:px-12 lg:px-24 xl:px-[150px] dark:bg-black h-12 flex flex-col md:flex-row justify-between items-center text-gray-200 border-t-[0.2px] border-opacity-10 dark:border-opacity-100 border-gray-900"
             style={{ fontFamily: "var(--font-manrope)" }}
         >
-            <div className="flex space-x-6 justify-center items-center">
+            <div className=" flex flex-col md:flex-row space-x-6 justify-center items-center">
                 <div>
                     <h1 className="text-md font-extrabold text-black dark:text-white">algoelevate.</h1>
 
