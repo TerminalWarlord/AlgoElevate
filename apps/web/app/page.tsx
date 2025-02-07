@@ -1,6 +1,6 @@
 import Sidebar from "@/components/layout/sidebar"
 import ProblemCard from "@/components/problem/problem-card"
-import { DIFFICULTY } from "@/constants/difficulty"
+import { DIFFICULTY } from "@/constants/types"
 import { prisma } from "@repo/db/client";
 
 async function getProblems(){
