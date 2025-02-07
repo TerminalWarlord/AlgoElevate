@@ -8,9 +8,9 @@ datasource db {
 }
 
 enum Difficulty {
-  easy
-  medium
-  hard
+  EASY
+  MEDIUM
+  HARD
 }
 
 model User {
@@ -32,10 +32,43 @@ model Code {
 }
 
 model Problem {
-  id           Int        @id @default(autoincrement())
-  title        String
-  slug         String
-  link         String
-  company_tags String[]
-  difficulty   Difficulty @default(easy)
+  id         Int                @id @default(autoincrement())
+  title      String
+  slug       String
+  link       String
+  difficulty Difficulty         @default(EASY)
+  companies  CompanyOnProblem[]
+  topics     TopicOnProblem[]
+}
+
+model Company {
+  id       Int                @id @default(autoincrement())
+  slug     String             @unique
+  title    String
+  problems CompanyOnProblem[]
+}
+
+model CompanyOnProblem {
+  problemId Int
+  problem   Problem @relation(fields: [problemId], references: [id])
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  @@id([problemId, companyId])
+}
+
+model Topic {
+  id      Int              @id @default(autoincrement())
+  slug    String           @unique
+  title   String
+  problem TopicOnProblem[]
+}
+
+model TopicOnProblem {
+  problemId Int
+  problem   Problem @relation(fields: [problemId], references: [id])
+  topicId   Int
+  topic     Topic   @relation(fields: [topicId], references: [id])
+
+  @@id([problemId, topicId])
 }

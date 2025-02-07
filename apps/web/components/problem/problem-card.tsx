@@ -1,6 +1,33 @@
 import Image from "next/image"
+import { DIFFICULTY } from "@/constants/difficulty";
+import Link from "next/link";
 
-const ProblemCard = () => {
+
+interface ProblemTags {
+    slug: string;
+    title: string
+}
+
+
+
+interface ProblemDetails {
+    title: string;
+    tags: ProblemTags[];
+    difficulty: DIFFICULTY;
+}
+
+const ProblemCard: React.FC<ProblemDetails> = ({ title, tags, difficulty }) => {
+    let difficultyClass = 'border-1 rounded-md border-gray-300 px-1 bg-opacity-80 text-xs ';
+
+    if(difficulty===DIFFICULTY.EASY){
+        difficultyClass+='bg-easy';
+    }
+    if(difficulty===DIFFICULTY.HARD){
+        difficultyClass += 'bg-hard';
+    }
+    else if(difficulty===DIFFICULTY.MEDIUM){
+        difficultyClass += 'bg-medium';
+    }
     return (
         <div
             className="flex rounded-xl 
@@ -17,18 +44,19 @@ const ProblemCard = () => {
             <div className="w-full flex justify-between space-x-10">
                 <div>
                     <div className="flex justify-center items-center space-x-2">
-                        <h1 className="text-black dark:text-white text-sm py-0 my-0">Max Chunks To Make Sorted</h1>
-                        <p className="border-1 rounded-md border-gray-300 px-1 bg-opacity-80 text-xs bg-easy">EASY</p>
+                        <h1 className="text-black dark:text-white text-sm py-0 my-0">{title}</h1>
+                        <p className={difficultyClass}>{difficulty.toString()}</p>
                         <Image alt="GFG" src={'./icons/platforms/gfg.svg'} width={20} height={20} className="border-2 bg-cover rounded-full p-0.5" />
                     </div>
                     <div className="flex flex-col sm:flex-row text-black dark:text-white text-xs space-y-1 space-x-0 sm:space-x-2 sm:space-y-0 w-fit">
-                        <p className="px-1 py-0 md:px-2 md:py-1 bg-gray-100 dark:bg-opacity-20 rounded-md">Google</p>
-                        <p className="px-1 py-0 md:px-2 md:py-1 bg-gray-100 dark:bg-opacity-20 rounded-md">Amazon</p>
+                        {tags.map(tag => {
+                            return <Link href={`/tag/${tag.slug}`} key={tag.slug} className="px-1 py-0 md:px-2 md:py-1 bg-gray-100 dark:bg-opacity-20 rounded-md">{tag.title}</Link>
+                        })}
                     </div>
-                    
+
                 </div>
                 <div>
-                    
+
                 </div>
             </div>
         </div>
