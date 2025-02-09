@@ -14,11 +14,12 @@ enum Difficulty {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   name     String
-  username String @unique
-  email    String @unique
+  username String   @unique
+  email    String   @unique
   code     Code[]
+  solved   Solved[]
 }
 
 model Code {
@@ -39,6 +40,7 @@ model Problem {
   difficulty Difficulty         @default(EASY)
   companies  CompanyOnProblem[]
   topics     TopicOnProblem[]
+  solved     Solved[]
 }
 
 model Company {
@@ -71,4 +73,12 @@ model TopicOnProblem {
   topic     Topic   @relation(fields: [topicId], references: [id])
 
   @@id([problemId, topicId])
+}
+
+model Solved {
+  id        Int     @id @default(autoincrement())
+  problemId Int
+  problem   Problem @relation(fields: [problemId], references: [id])
+  userId    Int
+  user      User    @relation(fields: [userId], references: [id])
 }

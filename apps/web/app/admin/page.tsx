@@ -12,10 +12,7 @@ import {
     SelectGroup,
     SelectLabel
 } from "@/components/ui/select";
-import { prisma } from "@repo/db/client"
 import { Input } from "@/components/ui/input";
-import SelectCompanies from "@/components/add-problems/select-companies";
-import SelectTopics from "@/components/add-problems/select-topics";
 import MultiSelectDropdown from "@/components/add-problems/multi-select-dropdown";
 import { useRef, useState } from "react";
 import { DIFFICULTY } from "@/constants/types";

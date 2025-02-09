@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { DIFFICULTY } from "@/constants/types";
 import Link from "next/link";
+import getPlatformIcon from "@/lib/getPlatformIcon";
 
 
 interface ProblemTags {
@@ -17,8 +18,12 @@ interface ProblemDetails {
     difficulty: DIFFICULTY;
 }
 
+
+
 const ProblemCard: React.FC<ProblemDetails> = ({ title, link, tags, difficulty }) => {
     let difficultyClass = 'border-1 rounded-md border-gray-300 px-1 bg-opacity-80 text-xs ';
+
+    const platformIcon = getPlatformIcon(link);
 
     if(difficulty===DIFFICULTY.EASY){
         difficultyClass+='bg-easy';
@@ -47,7 +52,7 @@ const ProblemCard: React.FC<ProblemDetails> = ({ title, link, tags, difficulty }
                     <a href={link} className="flex justify-center items-center space-x-2">
                         <h1 className="text-black dark:text-white text-sm py-0 my-0">{title}</h1>
                         <p className={difficultyClass}>{difficulty.toString()}</p>
-                        <Image alt="GFG" src={'./icons/platforms/gfg.svg'} width={20} height={20} className="border-2 bg-cover rounded-full p-0.5" />
+                        <Image alt={platformIcon.altText} src={platformIcon.iconPath} width={20} height={20} className="border-2 bg-cover rounded-full p-0.5" />
                     </a>
                     <div className="flex flex-col sm:flex-row text-black dark:text-white text-xs space-y-1 space-x-0 sm:space-x-2 sm:space-y-0 w-fit">
                         {tags.map(tag => {

@@ -1,7 +1,8 @@
-import Sidebar from "@/components/layout/sidebar"
+import Sidebar from "@/components/layout/sidebar";
 import ProblemCard from "@/components/problem/problem-card"
 import { DIFFICULTY } from "@/constants/types"
 import { prisma } from "@repo/db/client";
+import { getServerSession } from "next-auth";
 
 async function getProblems(){
     const problems = await prisma.problem.findMany({
@@ -18,16 +19,45 @@ async function getProblems(){
             }
         }
     });
-    console.log(problems);
     return problems;
 }
 
+
+
+const DUMMY_DATA = [
+    {
+        menuTitle: "DSA",
+        items: [
+            {
+                title: "Leetcode 150",
+                path: "leetcode-150"
+            }
+        ]
+    },
+    {
+        menuTitle: "System Design",
+        items: [
+            {
+                title: "Functional Requirements",
+                path: "functional-requirements"
+            },
+            {
+                title: "CAP theorem",
+                path: "cap-theorem"
+            },
+        ]
+    }
+]
+
 export default async function ProblemsPage() {
+    // const session = await getServerSession();
     const problems = await getProblems();
 
     return (
         <div className="mx-4 md:mx-12 lg:mx-24 xl:mx-[150px] flex">
-            <Sidebar />
+            <Sidebar 
+            menuItems={DUMMY_DATA}
+            />
             <div className="text-white border-r-[0.3px] border-opacity-15 dark:border-opacity-90 border-gray-700 w-full my-2">
                 {problems.map(problem=>{
                     return <ProblemCard
@@ -38,33 +68,6 @@ export default async function ProblemsPage() {
                         key={problem.id}
                     />
                 })}
-                {/* <ProblemCard
-                    title="Max Chunks To Make Sorted"
-                    tags={[{
-                        slug: 'amazon',
-                        title: 'Amazon'
-                    }]}
-                    difficulty={DIFFICULTY.EASY}
-                />
-                <ProblemCard
-                    title="Max Chunks To Make Sorted"
-                    tags={[{
-                        slug: 'Google',
-                        title: 'Google'
-                    }]}
-                    difficulty={DIFFICULTY.MEDIUM}
-                />
-                <ProblemCard
-                    title="Max Chunks To Make Sorted"
-                    tags={[{
-                        slug: 'Google',
-                        title: 'Google'
-                    },{
-                        slug: 'Amazon',
-                        title: 'Amazon'
-                    },]}
-                    difficulty={DIFFICULTY.HARD}
-                /> */}
             </div>
         </div>
     )
