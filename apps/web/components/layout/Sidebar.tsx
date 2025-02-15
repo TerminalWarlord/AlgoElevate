@@ -1,6 +1,7 @@
 import React from 'react'
 import { ScrollArea } from '../ui/scroll-area'
 import Link from 'next/link';
+import { prisma } from '@repo/db/client';
 
 
 // const tags = Array.from({ length: 5 }).map(
@@ -18,10 +19,60 @@ interface MenuItems {
 
 }
 
-const Sidebar: React.FC<{ menuItems: MenuItems[] }> = ({ menuItems }) => {
+
+const DUMMY_DATA = [
+    {
+        menuTitle: "DSA",
+        items: [
+            {
+                title: "Leetcode 150",
+                path: "leetcode-150"
+            }
+        ]
+    },
+    {
+        menuTitle: "Practice",
+        items: []
+    },
+    {
+        menuTitle: "System Design",
+        items: [
+            {
+                title: "Functional Requirements",
+                path: "functional-requirements"
+            },
+            {
+                title: "CAP theorem",
+                path: "cap-theorem"
+            },
+        ]
+    }
+]
+
+
+async function populateSidebar() {
+    const problemTags = await prisma.topic.findMany({
+        select: {
+            slug: true,
+            title: true
+        }
+    });
+    DUMMY_DATA[1].items = problemTags.map(topic => {
+        return {
+            title: topic.title,
+            path: "/topic/" + topic.slug
+        }
+    })
+}
+
+
+async function Sidebar() {
+    await populateSidebar();
+
     return (
+
         <ScrollArea className="h-screen w-64  text-white border-gray-700 border-x-[0.2px]">
-            {menuItems && menuItems.map(menuItem => {
+            {DUMMY_DATA && DUMMY_DATA.map(menuItem => {
                 return <div className="py-4 mx-3" style={{ fontFamily: 'var(--font-manrope)' }}>
                     <h4 className="mb-4 font-bold leading-none uppercase dark:text-gray-200 text-gray-900">{menuItem.menuTitle}</h4>
                     {menuItem.items && menuItem.items.map(item => {
@@ -34,6 +85,7 @@ const Sidebar: React.FC<{ menuItems: MenuItems[] }> = ({ menuItems }) => {
             })}
 
         </ScrollArea>
+
     )
 }
 

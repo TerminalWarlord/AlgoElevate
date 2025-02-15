@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image"
 import { DIFFICULTY } from "@/constants/types";
 import Link from "next/link";
 import getPlatformIcon from "@/lib/getPlatformIcon";
+import IsSolvedCheckbox from "./is-solved";
 
-
+import { SessionProvider, useSession } from "next-auth/react";
+import { prisma } from "@repo/db/client";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 interface ProblemTags {
     slug: string;
     title: string
@@ -12,26 +18,29 @@ interface ProblemTags {
 
 
 interface ProblemDetails {
+    problemId: number;
     title: string;
     link: string;
     tags: ProblemTags[];
     difficulty: DIFFICULTY;
+    isSolved: boolean
 }
 
 
 
-const ProblemCard: React.FC<ProblemDetails> = ({ title, link, tags, difficulty }) => {
+const ProblemCard:React.FC<ProblemDetails> = async({ problemId, title, link, tags, difficulty, isSolved })=>{
     let difficultyClass = 'border-1 rounded-md border-gray-300 px-1 bg-opacity-80 text-xs ';
+    
 
     const platformIcon = getPlatformIcon(link);
 
-    if(difficulty===DIFFICULTY.EASY){
-        difficultyClass+='bg-easy';
+    if (difficulty === DIFFICULTY.EASY) {
+        difficultyClass += 'bg-easy';
     }
-    if(difficulty===DIFFICULTY.HARD){
+    if (difficulty === DIFFICULTY.HARD) {
         difficultyClass += 'bg-hard';
     }
-    else if(difficulty===DIFFICULTY.MEDIUM){
+    else if (difficulty === DIFFICULTY.MEDIUM) {
         difficultyClass += 'bg-medium';
     }
     return (
@@ -45,7 +54,10 @@ const ProblemCard: React.FC<ProblemDetails> = ({ title, link, tags, difficulty }
             style={{ fontFamily: "var(--font-poppins)" }}
         >
             <div>
-                <Image alt="" src={'./icons/solved.svg'} width={30} height={30} className="dark:invert invert-0 w-6 aspect-square" />
+                {/* <Image alt="" src={'./icons/solved.svg'} width={30} height={30} className="dark:invert invert-0 w-6 aspect-square" /> */}
+                <SessionProvider>
+                    <IsSolvedCheckbox problemId={problemId} isSolved={isSolved}/>
+                </SessionProvider>
             </div>
             <div className="w-full flex justify-between space-x-10">
                 <div>
@@ -56,7 +68,7 @@ const ProblemCard: React.FC<ProblemDetails> = ({ title, link, tags, difficulty }
                     </a>
                     <div className="flex flex-col sm:flex-row text-black dark:text-white text-xs space-y-1 space-x-0 sm:space-x-2 sm:space-y-0 w-fit">
                         {tags.map(tag => {
-                            return <Link href={`/tag/${tag.slug}`} key={tag.slug} className="px-1 py-0 md:px-2 md:py-1 bg-gray-100 dark:bg-opacity-20 rounded-md">{tag.title}</Link>
+                            return <Link href={`/topic/${tag.slug}`} key={tag.slug} className="px-1 py-0 md:px-2 md:py-1 bg-gray-100 dark:bg-opacity-20 rounded-md">{tag.title}</Link>
                         })}
                     </div>
 
@@ -69,4 +81,4 @@ const ProblemCard: React.FC<ProblemDetails> = ({ title, link, tags, difficulty }
     )
 }
 
-export default ProblemCard
+export default ProblemCard;

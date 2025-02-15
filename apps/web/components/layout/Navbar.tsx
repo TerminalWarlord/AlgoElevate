@@ -34,6 +34,9 @@ const Navbar = () => {
                         <li>
                             <Link href={'/'}>Profile</Link>
                         </li>
+                        <li>
+                            <Link href={'/api/auth/signout'}>Logout</Link>
+                        </li>
                     </ul>
                 </div>
 
@@ -68,6 +71,9 @@ const Navbar = () => {
                         </li>
                         <li>
                             <Link href={'/'}>Profile</Link>
+                        </li>
+                        <li>
+                            <Link href={'/api/auth/signout'}>Logout</Link>
                         </li>
                     </ul>
                     <div className="mt-4 space-y-4">

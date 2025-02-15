@@ -14,12 +14,17 @@ enum Difficulty {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  name     String
-  username String   @unique
-  email    String   @unique
-  code     Code[]
-  solved   Solved[]
+  id         Int      @id @default(autoincrement())
+  name       String
+  username   String   @unique
+  email      String   @unique
+  image      String?
+  password   String
+  provider   String
+  providerId String   @unique
+  createdAt  DateTime @default(now())
+  code       Code[]
+  solved     Solved[]
 }
 
 model Code {
